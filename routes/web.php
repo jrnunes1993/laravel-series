@@ -11,6 +11,13 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/series', 'SeriesController@listarSeries');
+Route::get('/series/criar', 'SeriesController@create');
+Route::post('/series/criar', 'SeriesController@store');
+
