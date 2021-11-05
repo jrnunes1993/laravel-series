@@ -5,7 +5,9 @@
 @endsection
 @section('conteudo')
     @include('mensagem', ['mensagem' => $mensagem])
+    @auth
     <a href="{{route('form_criar_serie')}}" class="btn btn-dark mb-4">Adicionar</a>
+    @endauth
     <ul class="list-group">
         @foreach($series as $serie)
             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -22,19 +24,25 @@
                 </div>
 
                 <span class="d-flex">
-                    <button class="btn btn-info btn-sm" onclick="toggleInput({{ $serie->id }})">
+                    @auth
+                    <button  class="btn btn-info btn-sm" onclick="toggleInput({{ $serie->id }})">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <a href="/series/{{ $serie->id }}/temporadas" class="btn btn-info btn-sm">
+                    @endauth
+
+                    <a style="margin-left: 6px !important;" href="/series/{{ $serie->id }}/temporadas" class="btn btn-info btn-sm">
                         <i class="fas fa-external-link-alt"></i>
                     </a>
+
                     <form method="post" action="/series/remover/{{ $serie->id }}"
                           onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($serie->nome) }}?')">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-sm">
+                        @auth
+                        <button  style="margin-left: 6px !important;" class="btn btn-danger btn-sm">
                             <i class="far fa-trash-alt"></i>
                         </button>
+                        @endauth
                     </form>
                 </span>
             </li>

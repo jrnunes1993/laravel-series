@@ -43,7 +43,7 @@ class CriadorDeSerie
      */
     private function criarEpisodios(int $qtdEpisodios, $temporada): void
     {
-        for ($j = 1; $j < $qtdEpisodios; $j++) {
+        for ($j = 1; $j <= $qtdEpisodios; $j++) {
             $temporada->episodios()->create(['numero' => $j]);
         }
     }
